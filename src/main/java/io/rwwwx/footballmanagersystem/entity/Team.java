@@ -37,4 +37,8 @@ public class Team {
         this.players = players;
     }
 
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
 }

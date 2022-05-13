@@ -2,6 +2,7 @@ package io.rwwwx.footballmanagersystem.service;
 
 import io.rwwwx.footballmanagersystem.entity.Player;
 import io.rwwwx.footballmanagersystem.entity.PlayerDTO;
+import io.rwwwx.footballmanagersystem.entity.Team;
 import io.rwwwx.footballmanagersystem.exception.InvalidIdException;
 import io.rwwwx.footballmanagersystem.repository.PlayerRepository;
 import io.rwwwx.footballmanagersystem.utils.Mapper;
@@ -19,10 +20,6 @@ public class PlayerService {
     public PlayerService(PlayerRepository playerRepository, Mapper<PlayerDTO, Player> mapper) {
         this.playerRepository = playerRepository;
         this.mapper = mapper;
-    }
-
-    public PlayerDTO transferPlayer(Long playerId, Long newTeamId) {
-        return null;
     }
 
     public PlayerDTO save(PlayerDTO playerDTO) {

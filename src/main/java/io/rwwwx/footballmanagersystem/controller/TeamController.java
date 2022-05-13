@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/player")
+@RequestMapping("/team")
 public class TeamController {
 
     private final TeamService teamService;
