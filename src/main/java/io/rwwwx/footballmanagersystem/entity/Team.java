@@ -26,19 +26,20 @@ public class Team {
 
     private int account;
 
-    @OneToMany(mappedBy = "id")
-    private List<Player> players = new ArrayList<>();
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private final List<Player> players = new ArrayList<>();
 
-    public Team(Long id, int commission, String name, int account, List<Player> players) {
-        this.id = id;
+    public Team(int commission, String name, int account) {
         this.commission = commission;
         this.name = name;
         this.account = account;
-        this.players = players;
     }
 
     public void addPlayer(Player player) {
         players.add(player);
+    }
+    public void subtractMoney(int deductibleAmount) {
+        account = account - deductibleAmount;
     }
 
 }

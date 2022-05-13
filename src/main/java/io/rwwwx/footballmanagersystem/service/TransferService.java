@@ -1,7 +1,7 @@
 package io.rwwwx.footballmanagersystem.service;
 
 import io.rwwwx.footballmanagersystem.entity.Player;
-import io.rwwwx.footballmanagersystem.entity.PlayerDTO;
+import io.rwwwx.footballmanagersystem.dto.PlayerDTO;
 import io.rwwwx.footballmanagersystem.entity.Team;
 import io.rwwwx.footballmanagersystem.exception.AccountException;
 import io.rwwwx.footballmanagersystem.exception.InvalidIdException;
@@ -27,11 +27,12 @@ public class TransferService {
     }
 
     @Transactional
-    public PlayerDTO transferPlayer(Long playerId, Long newTeamId) throws RuntimeException {
+    public PlayerDTO transferPlayer(Long playerId, Long newTeamId) {
         if (!playerRepository.existsById(playerId) && !teamRepository.existsById(newTeamId)) {
             throw new InvalidIdException();
         }
         Player player = playerRepository.getById(playerId);
+        Team oldTeam = teamRepository.getById(player.getCurrentTeam().getId());
         Team newTeam = teamRepository.getById(newTeamId);
         int transferPrice = (player.getAmountOfExperience() * 100_000 / player.getAge());
         int commissionForTeam = (transferPrice * player.getCurrentTeam().getCommission()) / 100;
@@ -39,11 +40,11 @@ public class TransferService {
         if (newTeam.getAccount() < transferFullPrice) {
             throw new AccountException();
         }
+        oldTeam.subtractMoney(transferFullPrice);
         player.setCurrentTeam(newTeam);
         newTeam.addPlayer(player);
         teamRepository.save(newTeam);
-        playerRepository.save(player);
-        return mapper.convertToDto(playerRepository.getById(playerId));
+        return mapper.convertToDto(playerRepository.save(player));
     }
 
 }

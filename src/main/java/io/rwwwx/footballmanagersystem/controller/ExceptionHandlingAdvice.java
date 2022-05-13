@@ -13,7 +13,7 @@ public class ExceptionHandlingAdvice {
 
     @ExceptionHandler(InvalidIdException.class)
     public ResponseEntity<String> handle(RuntimeException e) {
-        log.error(String.valueOf(e));
+        log.error(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

@@ -1,6 +1,6 @@
 package io.rwwwx.footballmanagersystem.controller;
 
-import io.rwwwx.footballmanagersystem.entity.PlayerDTO;
+import io.rwwwx.footballmanagersystem.dto.PlayerDTO;
 import io.rwwwx.footballmanagersystem.service.PlayerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,14 +1,12 @@
 package io.rwwwx.footballmanagersystem.service;
 
 import io.rwwwx.footballmanagersystem.entity.Player;
-import io.rwwwx.footballmanagersystem.entity.PlayerDTO;
-import io.rwwwx.footballmanagersystem.entity.Team;
+import io.rwwwx.footballmanagersystem.dto.PlayerDTO;
 import io.rwwwx.footballmanagersystem.exception.InvalidIdException;
 import io.rwwwx.footballmanagersystem.repository.PlayerRepository;
 import io.rwwwx.footballmanagersystem.utils.Mapper;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -26,6 +24,7 @@ public class PlayerService {
         return mapper.convertToDto(playerRepository.save(mapper.convertToEntity(playerDTO)));
     }
 
+    @Transactional(readOnly = true)
     public PlayerDTO getById(Long id) {
         if (isPlayerExists(id)) {
             return mapper.convertToDto(playerRepository.getById(id));
@@ -34,6 +33,7 @@ public class PlayerService {
         }
     }
 
+    @Transactional
     public PlayerDTO updatePlayer(Long id, PlayerDTO updatedPlayer) {
         if (isPlayerExists(id)) {
             return mapper.convertToDto(playerRepository.save(mapper.convertToEntity(updatedPlayer)));

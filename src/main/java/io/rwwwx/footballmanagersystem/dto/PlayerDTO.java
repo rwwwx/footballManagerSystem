@@ -1,4 +1,4 @@
-package io.rwwwx.footballmanagersystem.entity;
+package io.rwwwx.footballmanagersystem.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 public class PlayerDTO {
-
 
     private long id;
 
@@ -25,23 +24,16 @@ public class PlayerDTO {
     @NotNull
     private int amountOfExperience;
 
-    private Team currentTeam;
+    //TODO add validation
+    @NotNull
+    private Long idOfCurrentTeam;
 
-    public PlayerDTO(long id, String firstName, String lastName, int age, int amountOfExperience, Team currentTeam) {
-        this.id = id;
+    public PlayerDTO(String firstName, String lastName, int age, int amountOfExperience, Long idOfCurrentTeam) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.amountOfExperience = amountOfExperience;
-        this.currentTeam = currentTeam;
-    }
-
-    public PlayerDTO(String firstName, String lastName, int age, int amountOfExperience, Team currentTeam) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.amountOfExperience = amountOfExperience;
-        this.currentTeam = currentTeam;
+        this.idOfCurrentTeam = idOfCurrentTeam;
     }
 
     public PlayerDTO(String firstName, String lastName, int age, int amountOfExperience) {

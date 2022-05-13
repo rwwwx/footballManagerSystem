@@ -1,6 +1,6 @@
 package io.rwwwx.footballmanagersystem.controller;
 
-import io.rwwwx.footballmanagersystem.entity.TeamDTO;
+import io.rwwwx.footballmanagersystem.dto.TeamDTO;
 import io.rwwwx.footballmanagersystem.service.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class TeamController {
 
     @PostMapping("/")
     public ResponseEntity<TeamDTO> saveNewTeam(@Valid @RequestBody TeamDTO teamDTO) {
-        return new ResponseEntity<>(teamService.saveNewTeam(teamDTO), HttpStatus.OK);
+        return new ResponseEntity<>(teamService.save(teamDTO), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
