@@ -2,7 +2,9 @@ package io.rwwwx.footballmanagersystem.utils;
 
 import io.rwwwx.footballmanagersystem.entity.Team;
 import io.rwwwx.footballmanagersystem.entity.TeamDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TeamMapper implements Mapper<TeamDTO, Team> {
 
     @Override

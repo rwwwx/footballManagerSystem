@@ -4,7 +4,12 @@ import io.rwwwx.footballmanagersystem.entity.Team;
 import io.rwwwx.footballmanagersystem.entity.TeamDTO;
 import io.rwwwx.footballmanagersystem.repository.TeamRepository;
 import io.rwwwx.footballmanagersystem.utils.Mapper;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
+@Service
+@Transactional
 public class TeamService {
 
     private final TeamRepository teamRepository;
@@ -30,7 +35,5 @@ public class TeamService {
     public void deleteTeam(Long id) {
         teamRepository.deleteById(id);
     }
-
-
 
 }

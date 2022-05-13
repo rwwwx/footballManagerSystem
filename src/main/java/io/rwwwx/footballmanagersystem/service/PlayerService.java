@@ -7,7 +7,10 @@ import io.rwwwx.footballmanagersystem.repository.PlayerRepository;
 import io.rwwwx.footballmanagersystem.utils.Mapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
