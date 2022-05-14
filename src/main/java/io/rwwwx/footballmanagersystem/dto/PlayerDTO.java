@@ -1,5 +1,6 @@
 package io.rwwwx.footballmanagersystem.dto;
 
+import io.rwwwx.footballmanagersystem.utils.TeamIdConstraint;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,8 +25,8 @@ public class PlayerDTO {
     @NotNull
     private int amountOfExperience;
 
-    //TODO add validation
     @NotNull
+    @TeamIdConstraint
     private Long idOfCurrentTeam;
 
     public PlayerDTO(String firstName, String lastName, int age, int amountOfExperience, Long idOfCurrentTeam) {
@@ -34,13 +35,6 @@ public class PlayerDTO {
         this.age = age;
         this.amountOfExperience = amountOfExperience;
         this.idOfCurrentTeam = idOfCurrentTeam;
-    }
-
-    public PlayerDTO(String firstName, String lastName, int age, int amountOfExperience) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.amountOfExperience = amountOfExperience;
     }
 
 }
