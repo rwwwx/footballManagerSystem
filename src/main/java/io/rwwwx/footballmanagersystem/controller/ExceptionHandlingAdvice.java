@@ -7,13 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
 @Slf4j
+@ControllerAdvice
 public class ExceptionHandlingAdvice {
 
     @ExceptionHandler(InvalidIdException.class)
-    public ResponseEntity<String> handle(RuntimeException e) {
-        log.error(e.getMessage());
+    public ResponseEntity<String> handle(InvalidIdException e) {
+        log.error("handled an exception - ", e);
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
