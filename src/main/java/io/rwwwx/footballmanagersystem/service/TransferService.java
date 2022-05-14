@@ -8,6 +8,7 @@ import io.rwwwx.footballmanagersystem.exception.InvalidIdException;
 import io.rwwwx.footballmanagersystem.repository.PlayerRepository;
 import io.rwwwx.footballmanagersystem.repository.TeamRepository;
 import io.rwwwx.footballmanagersystem.utils.Mapper;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,7 +29,7 @@ public class TransferService {
 
     @Transactional
     public PlayerDTO transferPlayer(Long playerId, Long newTeamId) {
-        if (!playerRepository.existsById(playerId) && !teamRepository.existsById(newTeamId)) {
+        if (!playerRepository.existsById(playerId) || !teamRepository.existsById(newTeamId)) {
             throw new InvalidIdException();
         }
         Player player = playerRepository.getById(playerId);
@@ -36,7 +37,7 @@ public class TransferService {
         Team newTeam = teamRepository.getById(newTeamId);
         int transferPrice = (player.getAmountOfExperience() * 100_000 / player.getAge());
         int commissionForTeam = (transferPrice * player.getCurrentTeam().getCommission()) / 100;
-        int transferFullPrice =  transferPrice + commissionForTeam;
+        int transferFullPrice = transferPrice + commissionForTeam;
         if (newTeam.getAccount() < transferFullPrice) {
             throw new AccountException();
         }
