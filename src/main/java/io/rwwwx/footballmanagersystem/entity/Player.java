@@ -23,8 +23,19 @@ public class Player {
     private int age;
     private int amountOfExperience;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "current_team_id")
+    @ManyToOne
     private Team currentTeam;
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", amountOfExperience=" + amountOfExperience +
+                ", currentTeam=" + currentTeam.getName() +
+                '}';
+    }
 
 }

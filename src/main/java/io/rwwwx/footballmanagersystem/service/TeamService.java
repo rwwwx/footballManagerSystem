@@ -3,6 +3,7 @@ package io.rwwwx.footballmanagersystem.service;
 import io.rwwwx.footballmanagersystem.entity.Team;
 import io.rwwwx.footballmanagersystem.dto.TeamDTO;
 import io.rwwwx.footballmanagersystem.exception.InvalidIdException;
+import io.rwwwx.footballmanagersystem.repository.PlayerRepository;
 import io.rwwwx.footballmanagersystem.repository.TeamRepository;
 import io.rwwwx.footballmanagersystem.utils.Mapper;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class TeamService {
 
     private final TeamRepository teamRepository;
+    private final PlayerRepository playerRepository;
     private final Mapper<TeamDTO, Team> mapper;
 
-    public TeamService(TeamRepository teamRepository, Mapper<TeamDTO, Team> mapper) {
+    public TeamService(TeamRepository teamRepository, PlayerRepository playerRepository, Mapper<TeamDTO, Team> mapper) {
         this.teamRepository = teamRepository;
+        this.playerRepository = playerRepository;
         this.mapper = mapper;
     }
 
@@ -41,6 +44,11 @@ public class TeamService {
 
     public void deleteTeam(Long id) {
         if (isTeamExists(id)) {
+            Team teamForDelete = teamRepository.getById(id);
+            teamForDelete.getPlayers().forEach(player -> {
+                player.setCurrentTeam(null);
+                playerRepository.save(player);
+            });
             teamRepository.deleteById(id);
         } else {
             throw new InvalidIdException();

@@ -26,20 +26,23 @@ public class Team {
 
     private int account;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "currentTeam")
     private final List<Player> players = new ArrayList<>();
-
-    public Team(int commission, String name, int account) {
-        this.commission = commission;
-        this.name = name;
-        this.account = account;
-    }
 
     public void addPlayer(Player player) {
         players.add(player);
     }
     public void subtractMoney(int deductibleAmount) {
         account = account - deductibleAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", players=" + players +
+                '}';
     }
 
 }
